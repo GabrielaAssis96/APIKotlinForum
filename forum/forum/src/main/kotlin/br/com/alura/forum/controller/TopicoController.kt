@@ -1,5 +1,6 @@
 package br.com.alura.forum.controller
 
+import br.com.alura.forum.dto.NovoTopicoDto
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.service.TopicoService
 import org.springframework.web.bind.annotation.*
@@ -19,7 +20,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody topico: Topico){
+    fun cadastrar(@RequestBody topico: NovoTopicoDto){
         return service.cadastrar(topico)
     }
 
