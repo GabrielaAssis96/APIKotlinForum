@@ -3,13 +3,11 @@ package br.com.alura.forum.dto
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
-data class NovoTopicoForm(
-    @field:NotEmpty
-    var titulo: String,
-    @field:NotEmpty
-    var mensagem: String,
+data class AtualizarTopicoForm(
     @field:NotNull
-    var idCurso: Long,
-    @field:NotNull
-    var idAutor: Long
+    val id: Long,
+    @field:NotEmpty
+    val titulo: String,
+    @field:NotEmpty
+    val mensagem: String
 )
