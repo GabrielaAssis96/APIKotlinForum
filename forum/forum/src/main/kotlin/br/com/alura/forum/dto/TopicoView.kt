@@ -1,8 +1,7 @@
 package br.com.alura.forum.dto
 
+import br.com.alura.forum.model.Resposta
 import br.com.alura.forum.model.StatusTopico
-import org.springframework.context.annotation.Bean
-import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 import javax.validation.constraints.NotEmpty
 
@@ -12,5 +11,6 @@ data class TopicoView(
     @field:NotEmpty
     val mensagem: String,
     val status: StatusTopico,
-    val dataCriacao: LocalDateTime
+    val dataCriacao: LocalDateTime,
+    var respostas: List<Resposta>
 )
