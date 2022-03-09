@@ -28,7 +28,7 @@ class TopicoService(
     fun buscarPorId(id: Long): TopicoView {
         val topico = topicos.stream().filter { t ->
             t.id == id
-        }.findFirst().get()
+        }.findFirst().orElseThrow{NotFoundException(notFoundMessage)}
         return topicoViewMapper.map(topico)
     }
 
