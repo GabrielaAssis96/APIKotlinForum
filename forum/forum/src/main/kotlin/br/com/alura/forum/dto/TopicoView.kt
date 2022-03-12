@@ -12,5 +12,4 @@ data class TopicoView(
     val mensagem: String,
     val status: StatusTopico,
     val dataCriacao: LocalDateTime,
-    var respostas: List<Resposta>
 )
