@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 import java.util.stream.Collectors
 
+
 @Service
 class TopicoService(
     internal var repository: TopicoRepository,
@@ -21,10 +22,13 @@ class TopicoService(
     private val notFoundMessage: String = "Topico não encontrado"
 ) {
 
-    fun listar(): List<TopicoView> {
-        return repository.findAll().stream().map { t ->
-            topicoViewMapper.map(t)
-        }.collect(Collectors.toList())
+    fun listar(nomeDoCurso: String?): List<TopicoView> {
+        val topicos = if (nomeDoCurso == null) {
+            repository.findAll()
+        } else
+            repository.findByCursoNome(nomeDoCurso)
+        return topicos.stream().map { t -> topicoViewMapper.map(t) }
+            .collect(Collectors.toList())
     }
 
     fun buscarPorId(id: Long): TopicoView {
