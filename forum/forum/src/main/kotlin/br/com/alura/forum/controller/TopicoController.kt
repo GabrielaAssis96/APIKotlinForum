@@ -4,6 +4,8 @@ import br.com.alura.forum.dto.AtualizarTopicoForm
 import br.com.alura.forum.dto.NovoTopicoForm
 import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.service.TopicoService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,8 +19,11 @@ import javax.validation.Valid
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun listar(@RequestParam(required = false) nomeDoCurso: String?): List<TopicoView> {
-        return service.listar(nomeDoCurso)
+    fun listar(
+        @RequestParam(required = false) nomeDoCurso: String?,
+        paginacao: Pageable
+    ): Page<TopicoView> {
+        return service.listar(nomeDoCurso, paginacao)
     }
 
     @GetMapping("/{id}")
