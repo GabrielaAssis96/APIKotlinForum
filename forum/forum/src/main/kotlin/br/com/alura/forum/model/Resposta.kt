@@ -8,7 +8,7 @@ import javax.persistence.*
 data class Resposta(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-    val mensagsem: String,
+    val mensagem: String,
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
     @ManyToOne
     val autor: Usuario,
