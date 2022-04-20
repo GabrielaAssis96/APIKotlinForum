@@ -1,15 +1,20 @@
 package br.com.alura.forum.service
 
+import br.com.alura.forum.exception.NotFoundException
 import br.com.alura.forum.model.Curso
 import br.com.alura.forum.model.Resposta
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.model.Usuario
+import br.com.alura.forum.repository.RespostaRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.stream.Collectors
 
 @Service
-class RespostaService(private var respostas: List<Resposta>) {
+class RespostaService(
+    private var repository: RespostaRepository,
+    private val notFoundMessage: String = "Resposta não encontrada"
+) {
     init {
         val curso = Curso(
             id = 1,
@@ -44,14 +49,14 @@ class RespostaService(private var respostas: List<Resposta>) {
             solucao = false
         )
 
-        respostas = Arrays.asList(resposta, resposta2)
+        var respostas = Arrays.asList(resposta, resposta2)
     }
 
     fun listar(idTopico: Long): List<Resposta> {
-        return respostas.stream().filter{
-            r -> r.topico.id == idTopico}.collect(Collectors.toList())
-        }
+        val resposta = repository.findById(idTopico).orElseThrow { NotFoundException(notFoundMessage) }
+        return TODO()
     }
+}
 
 
 
